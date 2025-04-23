@@ -43,18 +43,14 @@ The backpack contains a flask of water.
 
 A Mandrake Patch is west of the sunny meadow. "Mandrakes! So many mandrakes blossoming with delicate purple flowers in the wet, fecund earth. You know that just under the surface, buried within the rich loamy soil is the twisted, gnarly, forked root for which you search."
 
-Figure of Mandrake is the file "mandrake-1692332_1280.jpg".
-[
-Before looking when the location is the Mandrake Patch:
-    display the Figure of Mandrake;
-]
-
 A Mandrake root is a spell component.
 The description of the Mandrake root is "The plant is beautiful, but you have heard stories of people who died horrible deaths after pulling up a mandrake root. They are probably superstitious rumors, right?"
 A Mandrake root is in the mandrake patch.
 
 Instead of taking the Mandrake root when the player does not have the shovel:
 	say "A wise sorcerer once told you not to pull a Mandrake root with your bare hands. If only you had a shovel!"
+
+Figure of Mandrake is the file "mandrake_root_goryanskiy_vadim_drawing_2020.jpg".
 
 Instead of taking the Mandrake root when the player is not wearing the ear muffs:
 	display the Figure of Mandrake;
