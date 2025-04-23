@@ -43,15 +43,22 @@ The backpack contains a flask of water.
 
 A Mandrake Patch is west of the sunny meadow. "Mandrakes! So many mandrakes blossoming with delicate purple flowers in the wet, fecund earth. You know that just under the surface, buried within the rich loamy soil is the twisted, gnarly, forked root for which you search."
 
+Figure of Mandrake is the file "mandrake-1692332_1280.jpg".
+[
+Before looking when the location is the Mandrake Patch:
+    display the Figure of Mandrake;
+]
+
 A Mandrake root is a spell component.
 The description of the Mandrake root is "The plant is beautiful, but you have heard stories of people who died horrible deaths after pulling up a mandrake root. They are probably superstitious rumors, right?"
 A Mandrake root is in the mandrake patch.
 
 Instead of taking the Mandrake root when the player does not have the shovel:
-say "A wise sorcerer once told you not to pull a Mandrake root with your bare hands. If only you had a shovel!"
+	say "A wise sorcerer once told you not to pull a Mandrake root with your bare hands. If only you had a shovel!"
 
 Instead of taking the Mandrake root when the player is not wearing the ear muffs:
-say "As you pull up the mandrake root you hear an earsplitting shriek. As the shreik rings through your head your vision fades. The last thing you see before you lose consciousness, are tiny little legs pitter pattering acrosss the Mandrake Patch into the distance as it waves a little fist that looks oddly like it is flipping you off. When you awaken that mandrake root has disappeared. Lucky for you, there are many mandrakes left in the patch."
+	display the Figure of Mandrake;
+	say "As you pull up the mandrake root you hear an earsplitting shriek. As the shreik rings through your head your vision fades. The last thing you see before you lose consciousness, are tiny little legs pitter pattering acrosss the Mandrake Patch into the distance as it waves a little fist that looks oddly like it is flipping you off. When you awaken that mandrake root has disappeared. Lucky for you, there are many mandrakes left in the patch."
 
 [Expects you add a mandrake root to your inventory.]
 Test mandrake with "n / e / take shovel / w / w / wear ear muffs / w / x mandrake root / take mandrake root / i"
