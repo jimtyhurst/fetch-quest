@@ -12,13 +12,66 @@ The Stone Table is fixed in place and undescribed in the Glade. The description 
 
 The arcane runes are part of the Stone Table. The description is "[first time]You are new to magic, but… [only]The runes seem to outline a spell for creating a [quotation mark]fetch[quotation mark]. [first time]What that is you are not sure, but you know one way to find out: make one![line break][only]The spell appears to require consuming five components: [some mustard seed], [some Dragon Tree sap], [some quicksilver], [a wax effigy], and [a Mandrake root]." Understand "top" as the arcane runes.
 
-A spell component is a kind of thing. A spell component is always edible. After examining a spell component: say "[The noun] glows with an almost tangible mystic energy."
+A thing can be a spell component. Every spell component is edible.
+[A spell component is a kind of thing. A spell component is always edible. After examining a spell component: say "[The noun] glows with an almost tangible mystic energy."]
 
 Section 1 - Down The Winding Path
 
-The Winding Path is east of the Glade.
+The Winding Path is east of the Glade. "You find yourself in what looks like the remains of a forest. The trees are all dead, a few of them fallen over. You feel an overwhelming sense of dread emanating from this former forest. You see a stump, with [a wax effigy] clumsily laid on top of it.".
 
-The wax effigy is a spell component.
+[Squish values modeled after beverage heat values in "Disenchantment Bay"]
+
+Squish is a kind of value. The squishes are unmarred, squished, unrecognizable.
+
+The wax effigy is a spell component in The Winding Path. The wax effigy has a squish. The squish of the wax effigy is unmarred.
+
+[Picking up the effigy will "squish" it once each time, until it is unrecognizable.]
+After taking the wax effigy:
+	say "Oops, you squish it a little accidentally.";
+	let the current squish be the squish of the wax effigy;
+	if the current squish is not unrecognizable: 
+		now the squish of the wax effigy is the squish after the current squish.
+
+[You can't eat the wax effigy if it's unrecognizable (because it wouldn't work for the spell)]
+Check eating the wax effigy:
+	if the squish of the wax effigy is unrecognizable:
+		say "You're not sure it's a good idea to eat a wax effigy of nobody." instead;
+	otherwise:
+		say "The wax squishes between your teeth. Yum.";
+
+The description of the wax effigy is "[if the squish of the wax effigy is unmarred]The wax effigy looks familiar...you've never seen it before, but you can tell it's as good-looking as ever.[otherwise if the squish of the wax effigy is squished]The wax effigy looks a little squished, but you can still tell who it's supposed to be.[otherwise]The wax effigy is squished beyond recognition. Is it even still an effigy?[end if]"
+
+After examining the wax effigy:
+	if the squish of the wax effigy is not unrecognizable:
+		say "Careful, it seems fragile.";
+
+[The player can fix the wax effigy if it becomes unrecognizable.]
+Fixing is an action applying to one touchable thing.
+Understand "fix [something]" as fixing.
+
+Check fixing something (called target):
+	if the target is not the wax effigy:
+		say "You aren't sure how to fix that." instead.
+		
+Report fixing the wax effigy:
+	if the squish of the wax effigy is not unmarred:
+		say "You sculpt the wax effigy in your own image.";
+		now the squish of the wax effigy is unmarred;
+	otherwise:
+		say "This seems fine as-is.";
+
+[The player can taste the wax effigy, but this will squish it.]
+Instead of tasting the wax effigy:
+	say "This tastes like crayons!";
+	let the current squish be the squish of the wax effigy;
+	if the current squish is not unrecognizable: 
+		now the squish of the wax effigy is the squish after the current squish;
+		say "Oops. It's a little squished."
+		
+Instead of examining the wax effigy:
+	say "[if the squish of the wax effigy is unmarred]The wax effigy looks familiar...you've never seen it before, but you can tell it's as good-looking as ever.[otherwise if the squish of the wax effigy is squished]The wax effigy looks a little squished, but you can still tell who it's supposed to be.[otherwise]The wax effigy is squished beyond recognition. Is it even still an effigy?[end if]";
+	if the squish of the wax effigy is not unrecognizable:
+		say "Careful, it seems fragile.";
 
 Section 2 - Down The Rising Path
 
@@ -26,24 +79,208 @@ The Rising Path is west of the Glade.
 
 Some Dragon Tree sap is a spell component.
 
+There is a blanket in the Rising path.
+
+The merchant is a person on the blanket.
+
+A ware is a kind of thing.
+
+Some cake is a ware on the blanket.
+
+Instead of taking a ware (called the ware):
+	say "You can't steal [the ware], the merchant is looking right at you."
+
+[Buying is a built-in action, but it's "blocked" in all scenes by default; this unblocks it globally.]
+The block buying rule is not listed in the check buying rulebook.
+
+Check buying a thing (called the thing):
+	if the thing is not a ware:
+		say "[The thing] is not for sale." instead.
+
+Carry out buying a thing (called the ware):
+	now the ware is carried by the player.
+
+Report buying a thing (called the ware):
+	say "You buy [the ware]."
+
 Section 3 - Down The Upstream Path
 
-The Upstream Path is north of the Glade.
+The Upstream Path is north of the Glade and east of the Douglas Fir. "The path meanders through the forest, sometimes closer, sometimes farther from the stream. You walk along peacefully, mesmerized by its melodic, rhythmic gurgling. A sunny meadow lies [bold type]west[roman type] of the path. An old growth douglas fir tree is on the [bold type]east[roman type] side of the path."
+
+A Douglas Fir is east of the Upstream Path. "This enormous fir tree is definitely old growth."
+
+A shovel is in the Douglas Fir. The description of the shovel is "This digging spade has a fine oak handle. The blade is firm and clean."
+
+A Sunny Meadow is west of the Upstream Path. "The meadow is sunny, but wet and marshy. A dank, musty fragrance hangs in the air, rising from the damp soil. You hesitate to get your boots muddy, but you see a colorful patch further [bold type]west[roman type] on the far edge of the meadow. It is a sunny spot dotted by floppy rosettes of leaves adorned with purple flowers."
+
+A backpack is a container in the Sunny Meadow.
+The backpack contains ear muffs.
+The ear muffs are wearable.
+The backpack contains a flask of water.
+
+A Mandrake Patch is west of the sunny meadow. "Mandrakes! So many mandrakes blossoming with delicate purple flowers in the wet, fecund earth. You know that just under the surface, buried within the rich loamy soil is the twisted, gnarly, forked root for which you search."
 
 A Mandrake root is a spell component.
+The description of the Mandrake root is "The plant is beautiful, but you have heard stories of people who died horrible deaths after pulling up a mandrake root. They are probably superstitious rumors, right?"
+A Mandrake root is in the mandrake patch.
+
+Instead of taking the Mandrake root when the player does not have the shovel:
+say "A wise sorcerer once told you not to pull a Mandrake root with your bare hands. If only you had a shovel!"
+
+Instead of taking the Mandrake root when the player is not wearing the ear muffs:
+say "As you pull up the mandrake root you hear an earsplitting shriek. As the shriek rings through your head your vision fades. The last thing you see before you lose consciousness, are tiny little legs pitter pattering across the Mandrake Patch into the distance as it waves a little fist that looks oddly like it is flipping you off. When you awaken that mandrake root has disappeared. Lucky for you, there are many mandrakes left in the patch."
+
 
 Section 4 - Down The Downstream Path
 
 The Downstream Path is south of the Glade.
 
+The Downstream Path is a room. "You can see a damp cave further south along the river."
+
+The Cave is a dark room.   The Cave is south of the Downstream Path. "Extra Description"
+
+The Fairy is a thing.
+
+After going to The Downstream Path from The Cave for the first time:
+	now The Fairy is in the Downstream Path;
+	say "You see a fairy floating helplessly downriver."
+
+Every turn: if the player is in a dark room and the player is carrying the fairy, say "A light is peeking out of your bag."
+
+Every turn: If the the fairy is in a dark room, now the fairy is lit; otherwise now the fairy is unlit.
+
+Check taking the fairy when the fairy is in the cave: say "The fairy flutters out of your reach." instead.
+
 Some mustard seed is a spell component.
+Some mustard seed is in The Cave.
 
 Section 5 - Down The Widdershins Path
 
-The Widdershins Path is northwest of the glade.
+The Widdershins Path is northwest of the glade.  "This section of the forest is thick with trees and shrubs.  Someone thought it made an excellent social space, though, as they have constructed a nice [picnic table] and placed a [BBQ grill] here.  The dirt path leads southeast back toward the glade."
 
-Some quicksilver is a spell component.
+The picnic table is a fixed in place supporter in the Widdershins Path.  The description is "This picnic table, expertly crafted of sustainably-sourced redwood, boasts a natural charm and durability that's perfect for scary places like the Widdershins Path. [if blanket is on the picnic table]A blanket lies on the table. It is folded neatly, and it has a tacky red and blue checkered pattern.[end if] [if basket is on the picnic table] A charming little picnic basket sits on the table."
+
+A picnic blanket is a thing on the picnic table. The printed name is "picnic blanket".  The description is "A red and blue checkered picnic blanket. It is thin and well-worn, but is the perfect size to throw over an escaping animal."
+
+A uselessObject is a kind of thing.
+
+A uselessBlanket is a fixed in place uselessObject.  The printed name is "charred picnic blanket".  The description is "You can tell that this used to be a red and blue checkered picnic blanket, before it caught on fire somehow."  Understand "charred picnic blanket" as the uselessBlanket.
+
+The BBQ grill is a fixed in place supporter in the Widdershins Path.  The description is "A heavy-duty combo grill stands here - sleek and sturdy, with side-by-side gas and charcoal fireboxes.  Cast iron grates rest above dual heat sources, and a stainless steel warming rack hovers overhead.  Vents and adjustable trays offer precise temperature control.  A side burner waits for sauces or sides.  It even has a spacious storage cabinet beneath[if storage cabinet is closed], which appears to be secured by a slender silver lock[end if].  The scent of past cookouts lingers faintly in the air. [if shards are in Widdershins Path]Some silver shards glitter at the base of the grill. [end if][if net is on the BBQ grill]A net lies coiled on top of the warming rack. [end if]"
+
+A storage cabinet is an undescribed locked openable container.  The storage cabinet is part of the BBQ grill.
+
+Instead of unlocking the storage cabinet with the quicksliver:
+	If a random chance of 2 in 3 succeeds:
+		say "You manage to pick the lock on the storage cabinet, but the quicksliver was broken in the process.  The cabinet doors ponderously swing open.";
+		now the storage cabinet is unlocked;
+		now the storage cabinet is open;
+		now the quicksliver is off-stage;
+		now the shards are in the location;
+	else:
+		say "You didn't quite get it this time, but maybe if you try again...";
+
+A net is a thing on the BBQ grill.  The description is "A circular net made of tough, knotted rope, its edges lined with heavy lead weights.  Designed to be thrown, it spreads wide in the air before crashing down to entangle its target. The mesh is coarse but flexible, and a set of braided cords trails from the center - ready to be yanked to cinch it tight."  It is undescribed.
+
+A uselessNet is a fixed in place uselessObject.  The printed name is "old net".  The description is "A circular net made of tough, knotted rope, its edges lined with heavy lead weights.  Unfortunately, this one is brittle and useless."  Understand "old net" as the uselessNet.
+
+An ingot is a fixed in place thing on top of the picnic table.  The printed name is "ingot of quicksilver".  The description is "This is a strange ingot, cool and unnaturally smooth.  Its surface gleams with a muted, silvery luster that seems to ripple like frozen liquid.  Though clearly solid, it catches the light in a way that feels almost alive - like it’s holding motion just beneath its metallic skin.  You sense that this is no ordinary metal; it hums with latent energy, dense and unnerving."
+
+Instead of taking or touching the ingot:
+	say "At first touch, the ingot shudders, then quivers.  With a metallic squelch, it ripples like molten mercury, sprouts stubby pseudopods, and leaps away in a panic.  It clinks to the ground, jiggles indignantly, and darts down the path toward the glade, leaving a faint shimmer in its wake.";
+	now ingot is off-stage;
+	now slime is in the glade;
+
+Instead of throwing something at the ingot:
+	if the noun is carried by the player:
+		say "Even as [the noun] sails through the air toward it, the ingot seemingly melts, dripping between the board of the table to land in a puddle on the dirt path beneath.  The puddle shudders, then quivers, and with a metallic squelch, it ripples like molten mercury and sprouts stubby pseudopods.  It darts down the path toward the glade, leaving a faint shimmer in its wake.";
+		now ingot is off-stage;
+		now slime is in the glade;
+		now the noun is in the location;
+		now the noun is described;
+	else:
+		say "You can't see any such thing.";
+
+netTried is a truth state that varies.  netTried is false.
+basketTried is a truth state that varies.  basketTried is false.
+blanketTried is a truth state that varies. blanketTried is false.
+
+Instead of throwing something at the slime:
+	if the slime is asleep:
+		say "That would probably wake it up...";
+	else:
+		if the noun is the picnic blanket:
+			say "The blanket magestically flutters through the air and lands atop the quicksilver slime. Unfortunately for you, the slime soaks right through it, laughs, [if netTried is true and basketTried is true]yawns, [end if]and then darts down the path. The wet spot on the blanket suddenly combusts. ";
+			now the picnic blanket is off-stage;
+			now uselessBlanket is in the location;
+			now blanketTried is true;
+		else if the noun is the basket:
+			say "The expertly thrown basket lands upside-down atop the quicksilver slime, but before you could slide the top closed, the slime bursts through the side of the basket, jumps up and down, laughs, [if netTried is true and blanketTried is true]yawns, [end if]and then darts down the path. There is a huge hole in the side of the basket. ";
+			now basket is off-stage;
+			now uselessBasket is in the location;
+			now basketTried is true;
+		else if the noun is the net:
+			say "As the net settles on top of the quicksilver slime, it laughs out loud and just oozes out through the openings in the net.  It laughs again, jiggling a bit, [if basketTried is true and blanketTried is true]yawns, [end if]and darts down the path. Wherever the slime touched the strands of the net, they dissolve into dust. ";
+			now net is off-stage;
+			now uselessNet is in the location;
+			now netTried is true;
+		else if the noun is carried by the player:
+			say "Futile.";  [fix this]
+			stop the action;
+		else:
+			say "You're not carrying [the noun], so you can't throw it!";
+			stop the action;
+		let viable-rooms be the list of rooms;
+		remove the location from viable-rooms;
+		let N be a random number from 1 to the number of entries in viable-rooms;
+		let destination be entry N in viable-rooms;
+		now slime is in destination;
+		if the noun is the blanket or the noun is the basket or the noun is the net:
+			say "[The noun] is useless to you now.";
+			[now the noun is off-stage;]
+		if netTried is true and blanketTried is true and basketTried is true:
+			now slime is asleep;
+			now the printed name of slime is "sleeping quicksilver slime".
+
+Instead of taking the slime:
+	if the slime is asleep:
+		now slime is off-stage;
+		now quicksliver is carried by the player;
+		say "The sleeping quicksilver slime continues softly snoring as you attempt to pick it up.  You can't seem to get it in one piece, as it just keeps dripping between your fingers, but you do manage to get some of it.  The rest of it drains away into the dirt path.";
+	else:
+		say "It zigs and zags and you can't seem to get close enough to get hold of it."
+
+Instead of touching the slime:
+	if the slime is asleep:
+		say "It feels...mercurial.  Luckily, your gentle poke fails to awaken it.";
+	else:
+		say "It zigs and zags and you can't seem to get close enough to get hold of it."
+
+A slime is a thing.  The printed name is "quicksilver slime".  The description is "[if slime is not asleep]A jittery blob of semi-solid metal, the quicksilver slime pulses with nervous energy. Its mirrored surface warps reflections as it quivers, barely holding its shape. It gives off a faint metallic plink now and then, as if ready to flee at any moment.[else]A blob of semi-solid metal, the quicksilver slime pulses slowly and emits a soft but rythmic snore.  Its mirrored surface warps reflections as it slowly breathes.[end if]"
+
+The slime can be asleep or not asleep.  The slime is not asleep.
+
+Some quicksilver is a spell component.  It is in the storage cabinet.
+
+A basket is an open openable container on the table.  The printed name is "picnic basket".  The description is "A picnic basket."
+
+A uselessBasket is a fixed in place uselessObject.  The printed name is "busted picnic basket".  The description is "A picnic basket with a huge hole in one side."  Understand "busted picnic basket" as the uselessBasket.
+
+Instead of taking a uselessObject:
+	say "There's really no point in picking this up.";
+
+Instead of inserting into the basket:
+	say "That might soil the inside of the basket, ruining it for future picnics!";
+
+A quicksliver is a thing.  The quicksliver unlocks the storage cabinet.  The description is "This skinny sliver of shiny metal reminds you of a lockpick."
+
+Some shards is a fixed in place uselessObject.  The printed name is "shards of quicksliver".  The description is "These shards are all that is left of the quicksliver.  They are embedded in the ground and refuse to come out."
 
 Section 6 - Fetched
 
-Every turn when the player is in the Glade: if all spell components are off-stage, say "You have consumed the spell components and are ready to cast! The place is here, the time is now. You realize that laying upon the table will complete the spell, so you step on up."; now the player is on the Stone Table; say "You feel a dark energy surge through you. You see a shadowy form floating above you. You realize that this apparition is you — or rather, your 'fetch'.[paragraph break]You can feel the contents of your stomach roiling in agony; you slowly lose consciousness."; end the story.
+Every turn when the player is in the Glade:
+	if every thing which is a spell component is off-stage:
+		say "You have consumed the spell components and are ready to cast! The place is here, the time is now. You realize that laying upon the table will complete the spell, so you step on up.";
+		now the player is on the Stone Table;
+		say "You feel a dark energy surge through you. You see a shadowy form floating above you. You realize that this apparition is you — or rather, your 'fetch'.[paragraph break]You can feel the contents of your stomach roiling in agony; you slowly lose consciousness.";
+		end the story.
